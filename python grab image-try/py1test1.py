@@ -12,7 +12,7 @@ def getImg(html):
     imgre = re.compile(reg)
     imglist = re.findall(imgre,html)
     imglist = f7(imglist)
-    x = 1
+    x = -7
     for imgurl in imglist:
         urllib.urlretrieve(imgurl,"%s.jpg" %x)
         x+=1
@@ -25,5 +25,5 @@ def f7(seq):
 
 
 
-html = getHtml("https://www.etsy.com/search?q=table")
+html = getHtml("https://www.etsy.com/search/home_and_living/furniture?q=table&explicit=1&page=1")
 print getImg(html)
