@@ -11,15 +11,19 @@ def getImg(html):
     reg = 'src="(.+?\.jpg)"'
     imgre = re.compile(reg)
     imglist = re.findall(imgre,html)
-    x = 0
+    imglist = f7(imglist)
+    x = 1
     for imgurl in imglist:
-        urllib.urlretrieve(imgurl,'%s.jpg' % x)
+        urllib.urlretrieve(imgurl,"%s.jpg" %x)
         x+=1
     return imglist
 
+def f7(seq):
+    seen = set()
+    seen_add = seen.add
+    return [x for x in seq if not (x in seen or seen_add(x))]
 
-for i in range(1,2):
-    html = getHtml("https://www.etsy.com/search?q=furniture&explicit=1&page="+'%s'%i)
-    print getImg(html)
 
 
+html = getHtml("https://www.etsy.com/search?q=table")
+print getImg(html)
